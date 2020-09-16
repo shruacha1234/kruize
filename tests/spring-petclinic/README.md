@@ -1,7 +1,7 @@
 # Run the petclinic application using scripts 
 
-# change the directory
-cd kruize/tests/Spring-petclinic
+# Change the directory
+cd kruize/tests/spring-petclinic
 
 # Create the required setup
 ./scripts/petclinic-setup.sh
@@ -9,6 +9,6 @@ cd kruize/tests/Spring-petclinic
 # Run the load
 ./scripts/petclinic-load.sh
 
-#clear the setup
+#Clear the setup
 ./scripts/petclinic-cleanup.sh
 

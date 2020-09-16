@@ -60,6 +60,7 @@ function build_jmeter() {
 	pushd spring-petclinic >>${LOGFILE}
 	#./mvnw package 2>>${LOGFILE} >>${LOGFILE}
 	docker build -t jmeter_petclinic:3.1 -f Dockerfile_jmeter . 2>>${LOGFILE} >>${LOGFILE}
+	
 	err_exit "Error: Building of jmeter image."
 	popd >>${LOGFILE}
        
