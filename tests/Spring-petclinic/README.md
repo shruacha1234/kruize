@@ -1,4 +1,4 @@
-# Run the petclinic application using scripts 
+# Instructions to run the petclinic application using scripts 
 
 # Change the directory
 `$ cd kruize/tests/Spring-petclinic`
@@ -11,6 +11,8 @@ setup_info: (do_setup/use_image)
 
 do_setup : Build the setup using jar files
 
+pre-requisites:javac and git 
+
 ```
 $./scripts/petclinic-setup.sh do_setup
 Checking prereqs...done
@@ -19,7 +21,8 @@ Building jmeter with petclinic driver...done
 Running petclinic with inbuilt db...done
 ```
 use_image : Use the image to create the setup
-use_image imagename
+
+`use_image imagename`
 
 
 ```
@@ -28,7 +31,7 @@ Checking prereqs...done
 Running petclinic with inbuilt db...done
 ```
 
-If the image name is not specified the default image will be considered
+If the image name is not specified then the default image `kusumach/spring-petclinic:jdk11-Oj9-0423` will be considered
 ```
 $./scripts/petclinic-setup.sh use_image 
 Checking prereqs...done
@@ -40,11 +43,15 @@ Apply the load to the benchmark
 `./scripts/petclinic-load.sh load_info`
 
 load_info: [load type] [Number of iterations of the jmeter load] [ip_addr / namespace]"
+
 load type: docker icp openshift
 
 Number of iterations of the jmeter load: Number of times you want to run the load. It is optional, if is not specified then by default it will be considered as 5 iterations.
 
 ip_addr: IP address of the machine. It is optional, if is not specified then the get_ip function written inside the script will get the IP address of the machine.
+
+`jmeter-petclinic:3.1` is the image used to apply the load
+
 
 ```
 $./scripts/petclinic-load.sh docker 2 
@@ -67,7 +74,11 @@ RUN , THROUGHPUT , PAGES , AVG_RESPONSE_TIME , ERRORS
 1,310.7,6281,60,0
 2,687.1,14059,25,0
 ```
+last lines are the processed results of the run
 
-# Clear the setup
+# Cleanup
 `$ ./scripts/petclinic-cleanup.sh`
 
+
+# Note
+RHEL 8.0 - podman docker should have the latest network version to work.
