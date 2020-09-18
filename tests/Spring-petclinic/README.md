@@ -41,7 +41,9 @@ Apply the load to the benchmark
 
 load_info: [load type] [Number of iterations of the jmeter load] [ip_addr / namespace]"
 load type: docker icp openshift
-Number of iterations of the jmeter load: Number of times you want to run the load. It is optional, if is not specified then by default it will be considered as 5 iterations
+
+Number of iterations of the jmeter load: Number of times you want to run the load. It is optional, if is not specified then by default it will be considered as 5 iterations.
+
 ip_addr: IP address of the machine. It is optional, if is not specified then the get_ip function written inside the script will get the IP address of the machine.
 
 ```
