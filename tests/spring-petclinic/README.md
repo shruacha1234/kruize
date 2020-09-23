@@ -1,8 +1,5 @@
 # Instructions to run the petclinic application using scripts 
 
-# Change the directory
-`$ cd kruize/tests/Spring-petclinic`
-
 # Create the required setup
 Generate the images required for the setup 
 `./scripts/petclinic-setup.sh setup_info`
@@ -11,7 +8,7 @@ setup_info: (do_setup/use_image)
 
 do_setup : Build the setup using jar files
 
-pre-requisites:javac and git 
+Pre-requisites: javac and git 
 
 ```
 $./scripts/petclinic-setup.sh do_setup
@@ -21,20 +18,23 @@ Building jmeter with petclinic driver...done
 Running petclinic with inbuilt db...done
 ```
 use_image : Use the image to create the setup
-
-`use_image imagename`
+`use_image petclinic_imagename jmeter_imagename`
 
 
 ```
-$./scripts/petclinic-setup.sh use_image kruize/spring-petclinic:2.2.0
+$./scripts/petclinic-setup.sh use_image kruize/spring-petclinic:2.2.0 kruize/jmeter_petclinic:3.1
 Checking prereqs...done
+Pulling the jmeter image...done
 Running petclinic with inbuilt db...done
+
 ```
 
-If the image name is not specified then the default image `kusumach/spring-petclinic:jdk11-Oj9-0423` will be considered
+both `petclinic_imagename` and `jmeter_imagename` are optional, If the image names are not specified then the default image `kruize/spring-petclinic:2.2.0` will be considered for petclinic and `kruize/jmeter_petclinic:3.1` will be considered for jmeter.
+
 ```
-$./scripts/petclinic-setup.sh use_image 
+$ ./scripts/petclinic-setup.sh use_image 
 Checking prereqs...done
+Pulling the jmeter image...done
 Running petclinic with inbuilt db...done
 ```
 
@@ -74,11 +74,11 @@ RUN , THROUGHPUT , PAGES , AVG_RESPONSE_TIME , ERRORS
 1,310.7,6281,60,0
 2,687.1,14059,25,0
 ```
-last lines are the processed results of the run
+Above image shows the logs of the load run, and it processes and displays the output at the end
 
 # Cleanup
 `$ ./scripts/petclinic-cleanup.sh`
 
 
-# Note
-RHEL 8.0 - podman docker should have the latest network version to work.
+# Note for RHEL 8.0 users
+podman docker should have the latest network version to work.
