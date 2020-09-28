@@ -82,3 +82,92 @@ Above image shows the logs of the load run, and it processes and displays the ou
 
 # Note for RHEL 8.0 users
 podman docker should have the latest network version to work.
+
+# Openshift
+To deploy the benchmark use `petclinic-deploy-openshift.sh`
+
+# Get kruize recommendation for petclinic
+
+Create kruize setup
+`./scipts/kruize-build.sh`
+
+```
+$ ./scripts/kruize-build.sh 
+             Installing kruize for docker...
+##################################################
+
+
+Info: Checking pre requisites for Docker...
+kruize-network already exists
+Starting cadvisor container....
+Starting prometheus container....
+done
+
+Info: Waiting for prometheus/cadvisor to be up and running..
+Starting kruize container....
+Waiting for kruize container to come up...
+ cadvisor: found. Adding to list of containers to be monitored.
+ kruize: found. Adding to list of containers to be monitored.
+ prometheus: found. Adding to list of containers to be monitored.
+ petclinic-app: found. Adding to list of containers to be monitored.
+done
+```
+Get the recommendation for petclinic
+`./scripts/kruize-recommendation.sh`
+
+Before applying the load
+
+```
+$ ./scripts/kruize-recommendation.sh 
+#############################################################
+
+              kruize recommendation for petclinic..
+#############################################################
+
+[
+  {
+    "application_name": "petclinic-app",
+    "resources": {
+      "requests": {
+        "memory": "0.0M",
+        "cpu": 0.0
+      },
+      "limits": {
+        "memory": "0.0M",
+        "cpu": 0.0
+      }
+    }
+  }
+]
+
+```
+
+After applying the load
+
+```
+$ ./scripts/kruize-recommendation.sh 
+#############################################################
+
+              kruize recommendation for petclinic..
+#############################################################
+
+[
+  {
+    "application_name": "petclinic-app",
+    "resources": {
+      "requests": {
+        "memory": "568.3M",
+        "cpu": 1.3
+      },
+      "limits": {
+        "memory": "681.9M",
+        "cpu": 1.5
+      }
+    }
+  }
+]
+
+
+```
+
+

@@ -3,7 +3,7 @@
 # Set the defaults for the app
 export PETCLINIC_PORT="32334"
 export NETWORK="petclinic-net"
-export JMETER_IMAGE
+
 
 LOGFILE="${ROOT_DIR}/setup.log"
 
@@ -72,8 +72,10 @@ function pull_image() {
 	JMETER_IMAGE=$1
 	
 	docker pull ${JMETER_IMAGE} 2>>${LOGFILE} >>${LOGFILE}
-	err_exit "Error: Unable to pull the docker image ${JMETER_IMAGE}."
+	err_exit "Error: Unable to pull the jmeter image ${JMETER_IMAGE}."
 }
+
+
 
 
 # Run the petclinic application 
